@@ -45,3 +45,5 @@ Nous utilisons la version sémantique (**Semantic Versioning / SemVer**), au for
   - Ex : `1.2.3` → `1.2.4`
 
 Les numéros de version sont mis à jour en fonction des changements introduits dans le projet, afin de refléter clairement l’impact pour les utilisateurs et les développeurs.
+
+![alt text](image.png)
