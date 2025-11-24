@@ -7,6 +7,9 @@ name = "pypi"
 django = "*"
 
 [dev-packages]
+ruff = "*"
+coverage = "*"
+tox = "*"
 
 [requires]
 python_version = "3.13"
