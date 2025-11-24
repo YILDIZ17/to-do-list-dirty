@@ -27,6 +27,19 @@ if [ $? -ne 0 ]; then
 fi
 echo "Linter passed!"
 
+# Run accessibility tests
+echo ""
+echo "Running accessibility tests..."
+echo "Note: Make sure the Django server is running on http://localhost:8000/"
+echo "If not, start it with: pipenv run python manage.py runserver"
+echo ""
+./test_accessibility.sh
+if [ $? -ne 0 ]; then
+  echo "Error: Accessibility tests failed. Please fix the issues before building."
+  exit 1
+fi
+echo "Accessibility tests passed!"
+
 tmpfile=$(mktemp)
 awk -v ver="$VERSION" '/^VERSION = / {$0="VERSION = \x27"ver"\x27"} {print}' todo/settings.py > "$tmpfile" && mv "$tmpfile" todo/settings.py
 echo "Updated version in settings.py"
@@ -36,15 +49,16 @@ echo "Updated version in settings.py"
 echo "Adding settings.py to commit..."
 git add todo/settings.py
 
+echo "Committing changes..."
 git commit -m "Bump version to $VERSION"
 
 echo "Tagging commit..."
-git tag -a $VERSION -m "Release version $VERSION"
+git tag -a v$VERSION -m "Release version $VERSION"
 
-echo "Created tag $VERSION"
+echo "Created tag v$VERSION"
 echo "Pushing tag to remote..."
-git push origin $VERSION
+git push origin v$VERSION
 
 echo "Creating zip archive..."
-git archive --format=zip --output="todolist-$VERSION.zip" HEAD
-echo "Zip archive created: todolist-$VERSION.zip"
+git archive --format=zip --output="todolist-v$VERSION.zip" HEAD
+echo "Zip archive created: todolist-v$VERSION.zip"
