@@ -53,12 +53,12 @@ echo "Committing changes..."
 git commit -m "Bump version to $VERSION"
 
 echo "Tagging commit..."
-git tag -a v$VERSION -m "Release version $VERSION"
+git tag -a $VERSION -m "Release version $VERSION"
 
-echo "Created tag v$VERSION"
+echo "Created tag $VERSION"
 echo "Pushing tag to remote..."
-git push origin v$VERSION
+git push origin $VERSION
 
 echo "Creating zip archive..."
-git archive --format=zip --output="todolist-v$VERSION.zip" HEAD
-echo "Zip archive created: todolist-v$VERSION.zip"
+git archive --format=zip --output="todolist-$VERSION.zip" HEAD
+echo "Zip archive created: todolist-$VERSION.zip"
