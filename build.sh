@@ -20,7 +20,9 @@ echo "Building version: $VERSION"
 
 # Run linter
 echo "Running linter..."
-pipenv run ruff check .
+# On ignore N802 (nommage CamelCase des méthodes) pour permettre
+# la surcharge correcte des hooks unittest (startTest, addSuccess, etc.).
+pipenv run ruff check . --extend-ignore N802
 if [ $? -ne 0 ]; then
   echo "Error: Linter failed. Please fix the errors before building."
   exit 1
